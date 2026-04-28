@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#2D6A4F" />
+  <meta name="description" content="EcoTrack — Community resource accountability for informal settlements. Track water, energy, and waste together." />
+  <title>EcoTrack — Dharavi Block 7</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!--  APP SHELL                                            -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div id="app">
+
+    <!-- NAV BAR -->
+    <nav class="topbar" id="topbar">
+      <div class="topbar-brand">
+        <span class="brand-leaf">🌿</span>
+        <span class="brand-name">EcoTrack</span>
+        <span class="brand-location">Dharavi Block 7</span>
+      </div>
+      <div class="topbar-right">
+        <button class="lang-toggle" id="langToggle" aria-label="Toggle language">
+          <span id="langLabel">EN</span>
+        </button>
+        <div class="sync-wrap">
+          <span class="sync-time" id="syncTime">Last synced: 2 hrs ago</span>
+          <button class="sync-btn" id="syncBtn" aria-label="Sync data">
+            <svg class="sync-icon" id="syncIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="23 4 23 10 17 10"></polyline>
+              <polyline points="1 20 1 14 7 14"></polyline>
+              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+            </svg>
+            <span id="syncBtnLabel">Sync Now</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- SCREEN TABS -->
+    <div class="screen-tabs" id="screenTabs">
+      <button class="tab active" data-screen="dashboard" id="tab-dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <span data-en="Dashboard" data-hi="डैशबोर्ड">Dashboard</span>
+      </button>
+      <button class="tab" data-screen="input" id="tab-input">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        <span data-en="Report" data-hi="रिपोर्ट">Report</span>
+      </button>
+      <button class="tab" data-screen="feedback" id="tab-feedback">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <span data-en="My Impact" data-hi="मेरा प्रभाव">My Impact</span>
+      </button>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!--  SCREEN 1: COMMUNITY DASHBOARD                        -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section class="screen active" id="screen-dashboard">
+
+      <!-- HOW IT WORKS -->
+      <div class="how-it-works">
+        <h2 class="section-title" data-en="How It Works" data-hi="यह कैसे काम करता है">How It Works</h2>
+        <div class="steps-row">
+          <div class="step-card">
+            <div class="step-icon">📲</div>
+            <div class="step-num">1</div>
+            <p class="step-text" data-en="Report usage via chat or USSD" data-hi="चैट या USSD से रिपोर्ट करें">Report usage via chat or USSD</p>
+          </div>
+          <div class="step-arrow">→</div>
+          <div class="step-card">
+            <div class="step-icon">📊</div>
+            <div class="step-num">2</div>
+            <p class="step-text" data-en="Data syncs to community board" data-hi="डेटा कम्युनिटी बोर्ड में सिंक होता है">Data syncs to community board</p>
+          </div>
+          <div class="step-arrow">→</div>
+          <div class="step-card">
+            <div class="step-icon">🏆</div>
+            <div class="step-num">3</div>
+            <p class="step-text" data-en="Earn badges, grow your tree!" data-hi="बैज कमाएं, अपना पेड़ उगाएं!">Earn badges, grow your tree!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- METRIC CARDS -->
+      <div class="metrics-grid">
+        <div class="metric-card water">
+          <div class="metric-icon">💧</div>
+          <div class="metric-value" id="waterVal">180<span class="metric-unit">L</span></div>
+          <div class="metric-label" data-en="Water Saved Today" data-hi="आज पानी बचाया">Water Saved Today</div>
+          <div class="metric-delta down" id="waterDelta">▼ 30L vs yesterday</div>
+        </div>
+        <div class="metric-card energy">
+          <div class="metric-icon">⚡</div>
+          <div class="metric-value" id="energyVal">42<span class="metric-unit">kWh</span></div>
+          <div class="metric-label" data-en="Energy Shared" data-hi="ऊर्जा साझा">Energy Shared</div>
+          <div class="metric-delta up" id="energyDelta">▲ 8kWh vs yesterday</div>
+        </div>
+        <div class="metric-card waste">
+          <div class="metric-icon">♻️</div>
+          <div class="metric-value" id="wasteVal">56<span class="metric-unit">kg</span></div>
+          <div class="metric-label" data-en="Waste Recycled" data-hi="कचरा रीसाइकल">Waste Recycled</div>
+          <div class="metric-delta up" id="wasteDelta">▲ 14kg vs yesterday</div>
+        </div>
+      </div>
+
+      <!-- ECO SCORE + COMMUNITY TREE -->
+      <div class="score-tree-row">
+
+        <!-- ECO SCORE RING -->
+        <div class="eco-score-card">
+          <h3 class="card-title" data-en="Community Eco Score" data-hi="सामुदायिक इको स्कोर">Community Eco Score</h3>
+          <div class="ring-wrap">
+            <svg class="ring-svg" viewBox="0 0 120 120">
+              <circle class="ring-bg" cx="60" cy="60" r="50" />
+              <circle class="ring-fill" id="ecoRing" cx="60" cy="60" r="50"
+                stroke-dasharray="314"
+                stroke-dashoffset="314"
+                stroke="#2D6A4F" />
+            </svg>
+            <div class="ring-inner">
+              <span class="ring-score" id="ringScore">0</span>
+              <span class="ring-total">/100</span>
+              <span class="ring-status" id="ringStatus">Good</span>
+            </div>
+          </div>
+          <div class="score-legend">
+            <span class="leg green">● Great</span>
+            <span class="leg amber">● OK</span>
+            <span class="leg red">● Alert</span>
+          </div>
+          <p class="score-note" data-en="📈 Up 12 pts this week" data-hi="📈 इस सप्ताह 12 अंक ऊपर">📈 Up 12 pts this week</p>
+        </div>
+
+        <!-- COMMUNITY TREE -->
+        <div class="tree-card">
+          <h3 class="card-title" data-en="Community Tree" data-hi="सामुदायिक पेड़">Community Tree</h3>
+          <div class="tree-container" id="treeContainer">
+            <div class="tree-svg-wrap">
+              <!-- Trunk -->
+              <div class="tree-trunk"></div>
+              <!-- Canopy layers -->
+              <div class="tree-canopy layer-3" id="treeL3"></div>
+              <div class="tree-canopy layer-2" id="treeL2"></div>
+              <div class="tree-canopy layer-1" id="treeL1"></div>
+              <!-- Flowers -->
+              <div class="tree-flowers" id="treeFlowers">
+                <span class="flower">🌸</span>
+                <span class="flower">🌼</span>
+                <span class="flower">🌸</span>
+                <span class="flower">🌺</span>
+                <span class="flower">🌼</span>
+              </div>
+            </div>
+            <p class="tree-label" data-en="Score 74 — Thriving!" data-hi="स्कोर 74 — फलफूल रहा है!">Score 74 — Thriving!</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- IMPACT LEADERBOARD -->
+      <div class="leaderboard-card">
+        <h3 class="card-title" data-en="🏅 Impact Board — Top Households" data-hi="🏅 प्रभाव बोर्ड — शीर्ष घर">🏅 Impact Board — Top Households</h3>
+        <div class="leaderboard-list" id="leaderboard">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!--  SCREEN 2: RESIDENT INPUT (WhatsApp/USSD Chat)        -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section class="screen" id="screen-input">
+
+      <div class="chat-shell">
+        <div class="chat-header">
+          <div class="chat-avatar">🌿</div>
+          <div class="chat-info">
+            <div class="chat-name">EcoBot</div>
+            <div class="chat-status" data-en="● Online — Block 7 Helper" data-hi="● ऑनलाइन — ब्लॉक 7 सहायक">● Online — Block 7 Helper</div>
+          </div>
+          <div class="chat-signal">
+            <svg viewBox="0 0 24 24" width="18" fill="currentColor"><rect x="1" y="16" width="4" height="7" rx="1"/><rect x="7" y="11" width="4" height="12" rx="1" opacity=".6"/><rect x="13" y="6" width="4" height="17" rx="1" opacity=".3"/><rect x="19" y="1" width="4" height="22" rx="1" opacity=".15"/></svg>
+            USSD
+          </div>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+          <div class="msg bot">
+            <div class="msg-bubble" data-en="Namaste! 🙏 What did your household save today?" data-hi="नमस्ते! 🙏 आज आपके घर ने क्या बचाया?">Namaste! 🙏 What did your household save today?</div>
+            <div class="msg-time">10:02 AM</div>
+          </div>
+          <div class="msg bot">
+            <div class="msg-bubble" data-en="Choose a category 👇" data-hi="एक श्रेणी चुनें 👇">Choose a category 👇</div>
+            <div class="msg-time">10:02 AM</div>
+          </div>
+        </div>
+
+        <!-- CATEGORY TILES -->
+        <div class="category-tiles" id="categoryTiles">
+          <button class="cat-tile water-tile" data-cat="water" aria-label="Water">
+            <span class="cat-emoji">💧</span>
+            <span class="cat-name" data-en="Water" data-hi="पानी">Water</span>
+          </button>
+          <button class="cat-tile energy-tile" data-cat="energy" aria-label="Energy">
+            <span class="cat-emoji">⚡</span>
+            <span class="cat-name" data-en="Energy" data-hi="ऊर्जा">Energy</span>
+          </button>
+          <button class="cat-tile waste-tile" data-cat="waste" aria-label="Waste">
+            <span class="cat-emoji">♻️</span>
+            <span class="cat-name" data-en="Waste" data-hi="कचरा">Waste</span>
+          </button>
+        </div>
+
+        <!-- INPUT ROW -->
+        <div class="input-row" id="inputRow" style="display:none;">
+          <div class="selected-cat-badge" id="selectedCatBadge"></div>
+          <div class="amount-row">
+            <button class="voice-btn" id="voiceBtn" aria-label="Record voice note">
+              <span class="voice-icon" id="voiceIcon">🎙️</span>
+              <span class="voice-label" id="voiceBtnLabel" data-en="Voice Note" data-hi="वॉयस नोट">Voice Note</span>
+            </button>
+            <div class="num-input-wrap">
+              <input type="number" class="num-input" id="numInput" placeholder="0" min="0" max="9999" aria-label="Enter amount" />
+              <span class="num-unit" id="numUnit">L</span>
+            </div>
+          </div>
+          <button class="submit-btn" id="submitBtn">
+            <span data-en="Submit ✓" data-hi="जमा करें ✓">Submit ✓</span>
+          </button>
+        </div>
+
+        <!-- CONFIRMATION -->
+        <div class="confirm-wrap" id="confirmWrap" style="display:none;">
+          <div class="confirm-card">
+            <div class="confirm-ring-wrap">
+              <svg class="confirm-ring-svg" viewBox="0 0 100 100">
+                <circle class="cr-bg" cx="50" cy="50" r="42" />
+                <circle class="cr-fill" id="confirmRing" cx="50" cy="50" r="42" stroke-dasharray="264" stroke-dashoffset="264" />
+              </svg>
+              <span class="confirm-emoji" id="confirmEmoji">💧</span>
+            </div>
+            <h2 class="confirm-title" id="confirmTitle">Impact Calculated!</h2>
+            <p class="confirm-msg" id="confirmMsg">You saved <strong>15L</strong> of water today.</p>
+            <p class="confirm-pts">+8 Eco Points added to House 14 🏡</p>
+            <button class="confirm-new-btn" id="confirmNewBtn">
+              <span data-en="Report Another" data-hi="एक और रिपोर्ट करें">Report Another</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!--  SCREEN 3: FEEDBACK                                   -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section class="screen" id="screen-feedback">
+      <div class="feedback-shell" id="feedbackShell">
+
+        <div class="feedback-hero">
+          <div class="feedback-big-icon" id="feedbackIcon">💧</div>
+          <div class="feedback-number" id="feedbackNumber">180L</div>
+          <div class="feedback-message" id="feedbackMessage">Your group saved <strong>180L</strong> today!</div>
+          <div class="feedback-badge" id="feedbackBadge">🟢 Great Performance</div>
+        </div>
+
+        <div class="feedback-breakdown">
+          <div class="fb-item">
+            <span class="fb-icon">💧</span>
+            <div class="fb-bar-wrap">
+              <div class="fb-bar" id="fbWaterBar" style="width:0%;background:#48CAE4"></div>
+            </div>
+            <span class="fb-val">180L</span>
+          </div>
+          <div class="fb-item">
+            <span class="fb-icon">⚡</span>
+            <div class="fb-bar-wrap">
+              <div class="fb-bar" id="fbEnergyBar" style="width:0%;background:#E9C46A"></div>
+            </div>
+            <span class="fb-val">42kWh</span>
+          </div>
+          <div class="fb-item">
+            <span class="fb-icon">♻️</span>
+            <div class="fb-bar-wrap">
+              <div class="fb-bar" id="fbWasteBar" style="width:0%;background:#2D6A4F"></div>
+            </div>
+            <span class="fb-val">56kg</span>
+          </div>
+        </div>
+
+        <div class="audio-card">
+          <button class="audio-btn" id="audioBtn" aria-label="Play audio feedback">
+            <div class="audio-icon-wrap" id="audioIconWrap">
+              <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <div class="audio-info">
+              <p class="audio-title" data-en="Listen to your impact" data-hi="अपना प्रभाव सुनें">Listen to your impact</p>
+              <div class="audio-wave" id="audioWave">
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+          </button>
+        </div>
+
+        <div class="nudge-card">
+          <div class="nudge-icon">🤝</div>
+          <p class="nudge-text" data-en="Tell 1 neighbor to join EcoTrack today!" data-hi="आज 1 पड़ोसी को EcoTrack से जुड़ने के लिए कहें!">Tell 1 neighbor to join EcoTrack today!</p>
+          <div class="nudge-actions">
+            <button class="nudge-btn whatsapp" id="nudgeWA">
+              <span>📲</span>
+              <span data-en="Share on WhatsApp" data-hi="WhatsApp पर शेयर करें">Share on WhatsApp</span>
+            </button>
+            <button class="nudge-btn sms" id="nudgeSMS">
+              <span>✉️</span>
+              <span data-en="Send SMS" data-hi="SMS भेजें">Send SMS</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="house-rank">
+          <span class="house-rank-label" data-en="House 14 rank this week:" data-hi="इस सप्ताह हाउस 14 की रैंक:">House 14 rank this week:</span>
+          <span class="house-rank-val">#1 🥇</span>
+        </div>
+
+      </div>
+    </section>
+
+  </div><!-- /#app -->
+
+  <script src="app.js"></script>
+</body>
+</html>
